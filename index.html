@@ -60,12 +60,17 @@
     pointToLayer: function(feature, latlng){
       return new L.Marker(latlng, {
         icon: school
-      })
+      }).bindPopup(feature.properties['NAME']);
     }
   }).addTo(map);
 
   // add in the elementary school bounds
-  L.geoJSON(bcpsElemSchools).addTo(map);
+  L.geoJSON(bcpsElemSchools)
+  .bindPopup(function (layer) {
+    return layer.feature.properties['name'] + " District";
+  })
+  .addTo(map);
+
 
 </script>
 
